@@ -38,7 +38,7 @@ namespace Bootverhuur__t_Sloepke.Database
             }
         }
 
-        public bool AddBoot(Materiaal materiaal)
+        public bool AddMateriaal(Materiaal materiaal)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Bootverhuur__t_Sloepke.Database
             }
         }
 
-        public bool EditBoot(Materiaal materiaal)
+        public bool EditMateriaal(Materiaal materiaal)
         {
             try
             {
@@ -78,6 +78,7 @@ namespace Bootverhuur__t_Sloepke.Database
 
         public bool DeleteMateriaal(Materiaal materiaal)
         {
+            using (con)
             try
             {
                 con.Open();

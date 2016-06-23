@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Classes\Boot.cs" />
     <Compile Include="Classes\Huur.cs" />
+    <Compile Include="Classes\iProduct.cs" />
     <Compile Include="Classes\Materiaal.cs" />
     <Compile Include="Classes\Vaarplaats.cs" />
     <Compile Include="Database\BootDatabase.cs" />
