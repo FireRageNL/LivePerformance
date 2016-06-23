@@ -3,7 +3,7 @@ drop table typevaarwater cascade constraints;
 drop table type cascade constraints;
 drop table boot cascade constraints;
 drop table boothuur cascade constraints;
-drop table huurcontract cascade constraints;
+drop table huur cascade constraints;
 drop table klant cascade constraints;
 drop table huurmateriaal cascade constraints;
 drop table materiaal cascade constraints;
@@ -33,10 +33,10 @@ CREATE TABLE BOOT(
 Naam VARCHAR2(255) PRIMARY KEY,
 Type REFERENCES Type(Type) NOT NULL,
 Literinhoud NUMBER,
-Klasse VARCHAR2(100)
+Klasse VARCHAR2(100) NOT NULL
 );
 
-CREATE TABLE HUURCONTRACT(
+CREATE TABLE HUUR(
 HuurID NUMBER PRIMARY KEY,
 KlantID REFERENCES Klant(KlantID),
 DatumBegin DATE NOT NULL,
@@ -82,8 +82,8 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE TRIGGER Huur_ai
-BEFORE INSERT ON HUURCONTRACT
+CREATE OR REPLACE TRIGGER Huurcontract_ai
+BEFORE INSERT ON HUUR
 FOR EACH ROW
 BEGIN
 :new.HuurID := ai_huur.NEXTVAL;
@@ -91,7 +91,7 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER materiaal_ai
-BEFORE INSERT ON KLANT
+BEFORE INSERT ON MATERIAAL
 FOR EACH ROW
 BEGIN
 :new.MateriaalID := ai_materiaal.NEXTVAL;
@@ -99,7 +99,7 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER vaarwater_ai
-BEFORE INSERT ON KLANT
+BEFORE INSERT ON VAARWATER
 FOR EACH ROW
 BEGIN
 :new.VaarwaterID := ai_vaarwater.NEXTVAL;
