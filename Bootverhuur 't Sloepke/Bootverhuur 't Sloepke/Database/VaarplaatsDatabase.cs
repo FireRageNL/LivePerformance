@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Bootverhuur__t_Sloepke.Classes;
 using Oracle.ManagedDataAccess.Client;
 
@@ -7,13 +8,23 @@ namespace Bootverhuur__t_Sloepke.Database
 {
     class VaarplaatsDatabase : Database
     {
-        public bool AddVaarplaats(Vaarplaats vaar )
+        public bool AddVaarplaats(string vaar )
         {
             try
             {
                 Con.Open();
-                Cmd.CommandText = "INSERT INTO VAARWATER(NAAM) VALUES(:nm)";
-                Cmd.Parameters.Add("nm", vaar.Naam);
+                Cmd.CommandText = "INSERT INTO VAARWATER(NAAM) VALUES(:nm) RETURNING VaarwaterID INTO :vaarID";
+                Cmd.Parameters.Add("nm", vaar);
+                Cmd.Parameters.Add(new OracleParameter
+                {
+                    ParameterName = "vaarID",
+                    OracleDbType = OracleDbType.Int32,
+                    Direction = ParameterDirection.Output
+                });
+                Cmd.ExecuteNonQuery();
+                int vaarid = int.Parse(Cmd.Parameters["vaarID"].Value.ToString());
+                Cmd.CommandText = "INSERT INTO TYPEVAARWATER(VaarwaterID,Type) VALUES(:vwid,'Motorboot')";
+                Cmd.Parameters.Add("vwid", vaarid);
                 Cmd.ExecuteNonQuery();
                 Con.Close();
                 return true;

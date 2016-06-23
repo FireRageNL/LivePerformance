@@ -54,6 +54,10 @@ namespace Bootverhuur__t_Sloepke
             this.label7 = new System.Windows.Forms.Label();
             this.lblMeren = new System.Windows.Forms.Label();
             this.btnExporteerContract = new System.Windows.Forms.Button();
+            this.btnAddVaarwater = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudBudget)).BeginInit();
             this.SuspendLayout();
             // 
@@ -256,11 +260,52 @@ namespace Bootverhuur__t_Sloepke
             this.btnExporteerContract.UseVisualStyleBackColor = true;
             this.btnExporteerContract.Click += new System.EventHandler(this.btnExporteerContract_Click);
             // 
+            // btnAddVaarwater
+            // 
+            this.btnAddVaarwater.Location = new System.Drawing.Point(83, 493);
+            this.btnAddVaarwater.Name = "btnAddVaarwater";
+            this.btnAddVaarwater.Size = new System.Drawing.Size(125, 23);
+            this.btnAddVaarwater.TabIndex = 23;
+            this.btnAddVaarwater.Text = "Vaarwater toevoegen";
+            this.btnAddVaarwater.UseVisualStyleBackColor = true;
+            this.btnAddVaarwater.Click += new System.EventHandler(this.btnAddVaarwater_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(342, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Boten";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(661, 16);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Vaarwater";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(830, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Materialen";
+            // 
             // HuurAanmaken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 528);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.btnAddVaarwater);
             this.Controls.Add(this.btnExporteerContract);
             this.Controls.Add(this.lblMeren);
             this.Controls.Add(this.label7);
@@ -318,6 +363,10 @@ namespace Bootverhuur__t_Sloepke
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblMeren;
         private System.Windows.Forms.Button btnExporteerContract;
+        private System.Windows.Forms.Button btnAddVaarwater;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 

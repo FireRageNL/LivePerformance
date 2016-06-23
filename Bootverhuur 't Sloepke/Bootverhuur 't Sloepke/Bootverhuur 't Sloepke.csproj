@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddVaarplaats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddVaarplaats.Designer.cs">
+      <DependentUpon>AddVaarplaats.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Boot.cs" />
     <Compile Include="Classes\Huur.cs" />
     <Compile Include="Classes\iProduct.cs" />
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddVaarplaats.resx">
+      <DependentUpon>AddVaarplaats.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

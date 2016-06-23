@@ -25,7 +25,7 @@ namespace Bootverhuur__t_Sloepke.Classes
             Id = id;
 
         }
-        public bool AddVaarplaats(Vaarplaats vaar)
+        public bool AddVaarplaats(string vaar)
         {
             return Db.AddVaarplaats(vaar);
         }

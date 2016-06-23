@@ -73,5 +73,11 @@ namespace Bootverhuur__t_Sloepke
                 listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value, nudBudget.Value);
             hr.ExportHuur(fbd);
         }
+
+        private void btnAddVaarwater_Click(object sender, EventArgs e)
+        {
+            AddVaarplaats show = new AddVaarplaats();
+            show.ShowDialog();
+        }
     }
 }
