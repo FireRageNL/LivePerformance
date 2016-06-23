@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Database;
 
@@ -40,9 +42,26 @@ namespace Bootverhuur__t_Sloepke.Classes
             return _db.GetAllHuren();
         }
 
-        public void ExportHuur(Huur huur)
+        public void ExportHuur(FolderBrowserDialog file)
         {
-            //make the stream write dem huur
+            string writeloc = file.SelectedPath + "\\Huurcontract - " + this.Huurdernaam + ".txt";
+            using (StreamWriter writer = File.CreateText(writeloc))
+            {
+                writer.WriteLine("Huurder "+ Huurdernaam + " is met Verhuurder "+Naam +" op "+ DateTime.Today.ToShortDateString()+ " Overeengekomen tot de huur van: ");
+                writer.WriteLine("Boot: "+ Boot.Naam);
+                foreach (Materiaal mat in Materialen)
+                {
+                    writer.WriteLine("Materiaal: "+ mat.Naam);
+                }
+                writer.WriteLine("Voor de volgende locaties: ");
+                foreach (Vaarplaats vaar in Vaarplaatsen)
+                {
+                    writer.WriteLine(vaar.Naam);
+                }
+                writer.WriteLine("Aantal Friese meren: "+ Meeren);
+                writer.WriteLine("Voor de tijdsduur: " + HuurBegin.Date.ToShortDateString() + " tot en met "+ HuurEind.Date.ToShortDateString());
+                writer.WriteLine("Voor het bedrag van: " +Budget+" euro");
+            }
         }
 
         public int CalculateVaarplaatsen(decimal budget)
@@ -97,18 +116,29 @@ namespace Bootverhuur__t_Sloepke.Classes
             HuurEind = dtpEind;
         }
 
-        public bool AddHuur(string email, string huurder, string verhuurder, Boot boot, ListBox.SelectedObjectCollection materiaal, ListBox.SelectedObjectCollection vaarwater, DateTime begin, DateTime eind, decimal budget)
+        public void UpdateHuurCompletely(string email, string huurder, string verhuurder, Boot boot,
+            ListBox.SelectedObjectCollection materiaal, ListBox.SelectedObjectCollection vaarwater, DateTime begin,
+            DateTime eind, decimal budget)
         {
             Huurderemail = email;
             Huurdernaam = huurder;
             Naam = verhuurder;
             Boot = boot;
             Budget = budget;
-            UpdateData(begin,eind);
+            UpdateData(begin, eind);
             UpdateMateriaal(materiaal);
             UpdateVaarwater(vaarwater);
             CalculateVaarplaatsen(Budget);
+        }
+        public bool AddHuur(string email, string huurder, string verhuurder, Boot boot, ListBox.SelectedObjectCollection materiaal, ListBox.SelectedObjectCollection vaarwater, DateTime begin, DateTime eind, decimal budget)
+        {
+            UpdateHuurCompletely(email, huurder, verhuurder, boot, materiaal, vaarwater, begin, eind, budget);
             return _db.AddHuur(this);
+        }
+
+        public override string ToString()
+        {
+            return "Boot:    <" + Boot.Naam +">    verhuurd vanaf:    <"+ HuurBegin.ToShortDateString() + "> tot <"+ HuurEind.ToShortDateString()+">     Aan: <" +Huurdernaam+">";
         }
     }
 }

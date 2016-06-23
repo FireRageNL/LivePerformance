@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Classes;
 
@@ -51,7 +52,26 @@ namespace Bootverhuur__t_Sloepke
 
         private void btnToon_Click(object sender, EventArgs e)
         {
+            Huurcontracten show = new Huurcontracten(hr);
+            show.Show();
+        }
 
+        private void btnExporteerContract_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbEmail.Text) || string.IsNullOrWhiteSpace(tbHuurder.Text) ||
+            string.IsNullOrWhiteSpace(tbVerhuurder.Text))
+            {
+                MessageBox.Show("Vul alle velden in!");
+                return;
+            }
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            DialogResult result = fbd.ShowDialog();
+
+            if (result != DialogResult.OK) return;
+            hr.UpdateHuurCompletely(tbEmail.Text, tbHuurder.Text, tbVerhuurder.Text, (Boot)listBoot.SelectedItem,
+                listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value, nudBudget.Value);
+            hr.ExportHuur(fbd);
         }
     }
 }

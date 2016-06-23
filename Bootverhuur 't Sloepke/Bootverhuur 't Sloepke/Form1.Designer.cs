@@ -53,6 +53,7 @@ namespace Bootverhuur__t_Sloepke
             this.listMateriaal = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblMeren = new System.Windows.Forms.Label();
+            this.btnExporteerContract = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudBudget)).BeginInit();
             this.SuspendLayout();
             // 
@@ -245,11 +246,22 @@ namespace Bootverhuur__t_Sloepke
             this.lblMeren.Size = new System.Drawing.Size(0, 13);
             this.lblMeren.TabIndex = 21;
             // 
+            // btnExporteerContract
+            // 
+            this.btnExporteerContract.Location = new System.Drawing.Point(166, 408);
+            this.btnExporteerContract.Name = "btnExporteerContract";
+            this.btnExporteerContract.Size = new System.Drawing.Size(87, 56);
+            this.btnExporteerContract.TabIndex = 22;
+            this.btnExporteerContract.Text = "Exporteer huurcontract";
+            this.btnExporteerContract.UseVisualStyleBackColor = true;
+            this.btnExporteerContract.Click += new System.EventHandler(this.btnExporteerContract_Click);
+            // 
             // HuurAanmaken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 528);
+            this.Controls.Add(this.btnExporteerContract);
             this.Controls.Add(this.lblMeren);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.listMateriaal);
@@ -305,6 +317,7 @@ namespace Bootverhuur__t_Sloepke
         private System.Windows.Forms.ListBox listMateriaal;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblMeren;
+        private System.Windows.Forms.Button btnExporteerContract;
     }
 }
 

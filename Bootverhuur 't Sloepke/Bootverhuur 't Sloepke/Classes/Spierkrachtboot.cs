@@ -10,6 +10,10 @@
             Klasse = klasse;
         }
 
+        public Spierkrachtboot()
+        {
+        }
+
         public override string ToString()
         {
             return Klasse+ " - " +Naam;

@@ -72,7 +72,34 @@ namespace Bootverhuur__t_Sloepke.Database
                 OracleDataReader dr = Cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    //DO THE ADDING
+                    Cmd.Parameters.Clear();
+                    int huurid = dr.GetInt32(0);
+                    Cmd.CommandText = "SELECT Naam FROM boothuur WHERE Huurid = :hid";
+                    Cmd.Parameters.Add("hid", huurid);
+                    OracleDataReader dr2 = Cmd.ExecuteReader();
+                    dr2.Read();
+                    Boot bname = new Spierkrachtboot();
+                    if (dr2.HasRows)
+                    {
+                        bname.Naam = dr2.GetString(0);
+                    }
+                    Cmd.CommandText = "SELECT NAAM FROM KLANT WHERE KLANTID = :kid";
+                    Cmd.Parameters.Add("kid", dr.GetInt32(1));
+                    OracleDataReader dr3 = Cmd.ExecuteReader();
+                    dr3.Read();
+                    string kname = null;
+                    if (dr3.HasRows)
+                    {
+                        kname = dr3.GetString(0);
+                    }
+                    Huur add = new Huur
+                    {
+                        Huurdernaam = kname,
+                        Boot =  bname,
+                        HuurBegin = dr.GetDateTime(2),
+                        HuurEind = dr.GetDateTime(3)
+                    };
+                    ret.Add(add);
                 }
                 Con.Close();
                 return ret;
