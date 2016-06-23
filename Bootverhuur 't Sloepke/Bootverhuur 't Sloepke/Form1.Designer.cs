@@ -58,6 +58,7 @@ namespace Bootverhuur__t_Sloepke
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnExportHTML = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudBudget)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,7 +253,7 @@ namespace Bootverhuur__t_Sloepke
             // 
             // btnExporteerContract
             // 
-            this.btnExporteerContract.Location = new System.Drawing.Point(166, 408);
+            this.btnExporteerContract.Location = new System.Drawing.Point(140, 408);
             this.btnExporteerContract.Name = "btnExporteerContract";
             this.btnExporteerContract.Size = new System.Drawing.Size(87, 56);
             this.btnExporteerContract.TabIndex = 22;
@@ -297,11 +298,22 @@ namespace Bootverhuur__t_Sloepke
             this.label10.TabIndex = 26;
             this.label10.Text = "Materialen";
             // 
+            // btnExportHTML
+            // 
+            this.btnExportHTML.Location = new System.Drawing.Point(252, 408);
+            this.btnExportHTML.Name = "btnExportHTML";
+            this.btnExportHTML.Size = new System.Drawing.Size(87, 56);
+            this.btnExportHTML.TabIndex = 27;
+            this.btnExportHTML.Text = "Exporteer huurcontract HTML";
+            this.btnExportHTML.UseVisualStyleBackColor = true;
+            this.btnExportHTML.Click += new System.EventHandler(this.btnExportHTML_Click);
+            // 
             // HuurAanmaken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 528);
+            this.Controls.Add(this.btnExportHTML);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -367,6 +379,7 @@ namespace Bootverhuur__t_Sloepke
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnExportHTML;
     }
 }
 

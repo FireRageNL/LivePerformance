@@ -41,25 +41,61 @@ namespace Bootverhuur__t_Sloepke.Classes
             return _db.GetAllHuren();
         }
 
-        public void ExportHuur(FolderBrowserDialog file)
+        public void ExportHuur(FolderBrowserDialog file, int type)
         {
-            string writeloc = file.SelectedPath + "\\Huurcontract - " + Huurdernaam + ".txt";
+            string writeloc = null;
+            if (type == 0)
+            {
+                writeloc = file.SelectedPath + "\\Huurcontract - " + Huurdernaam + ".txt";
+
+            }
+            else
+            {
+                writeloc = file.SelectedPath + "\\Huurcontract - " + Huurdernaam + ".html";
+            }
             using (StreamWriter writer = File.CreateText(writeloc))
             {
-                writer.WriteLine("Huurder "+ Huurdernaam + " is met Verhuurder "+Naam +" op "+ DateTime.Today.ToShortDateString()+ " Overeengekomen tot de huur van: ");
-                writer.WriteLine("Boot: "+ Boot.Naam);
-                foreach (Materiaal mat in Materialen)
+                if (type == 1)
                 {
-                    writer.WriteLine("Materiaal: "+ mat.Naam);
+                    writer.WriteLine("<html><head></head><body>");
+                    writer.WriteLine("Huurder " + Huurdernaam + " is met Verhuurder " + Naam + " op " +
+                                     DateTime.Today.ToShortDateString() + " Overeengekomen tot de huur van: <br><br>");
+                    writer.WriteLine("Boot: " + Boot.Naam +"<br>");
+                    foreach (Materiaal mat in Materialen)
+                    {
+                        writer.WriteLine("Materiaal: " + mat.Naam+"<br>");
+                    }
+                    writer.WriteLine("Voor de volgende locaties: <br><br>");
+                    foreach (Vaarplaats vaar in Vaarplaatsen)
+                    {
+                        writer.WriteLine(vaar.Naam+"<br>");
+                    }
+                    writer.WriteLine("Aantal Friese meren: " + Meeren+"<br><br>");
+                    writer.WriteLine("Voor de tijdsduur: " + HuurBegin.Date.ToShortDateString() + " tot en met " +
+                                     HuurEind.Date.ToShortDateString()+"<br>");
+                    writer.WriteLine("Voor het bedrag van: " + Budget + " euro");
+                    writer.WriteLine("</body></html>");
                 }
-                writer.WriteLine("Voor de volgende locaties: ");
-                foreach (Vaarplaats vaar in Vaarplaatsen)
+                else
                 {
-                    writer.WriteLine(vaar.Naam);
+                    writer.WriteLine("Huurder " + Huurdernaam + " is met Verhuurder " + Naam + " op " +
+                                     DateTime.Today.ToShortDateString() + " Overeengekomen tot de huur van: ");
+                    writer.WriteLine("Boot: " + Boot.Naam);
+                    foreach (Materiaal mat in Materialen)
+                    {
+                        writer.WriteLine("Materiaal: " + mat.Naam);
+                    }
+                    writer.WriteLine("Voor de volgende locaties: ");
+                    foreach (Vaarplaats vaar in Vaarplaatsen)
+                    {
+                        writer.WriteLine(vaar.Naam);
+                    }
+                    writer.WriteLine("Aantal Friese meren: " + Meeren);
+                    writer.WriteLine("Voor de tijdsduur: " + HuurBegin.Date.ToShortDateString() + " tot en met " +
+                                     HuurEind.Date.ToShortDateString());
+                    writer.WriteLine("Voor het bedrag van: " + Budget + " euro");
                 }
-                writer.WriteLine("Aantal Friese meren: "+ Meeren);
-                writer.WriteLine("Voor de tijdsduur: " + HuurBegin.Date.ToShortDateString() + " tot en met "+ HuurEind.Date.ToShortDateString());
-                writer.WriteLine("Voor het bedrag van: " +Budget+" euro");
+
             }
         }
 

@@ -42,7 +42,7 @@ namespace Bootverhuur__t_Sloepke
                 return;
             }
             bool succ = hr.AddHuur(tbEmail.Text, tbHuurder.Text, tbVerhuurder.Text, (Boot)listBoot.SelectedItem,
-                listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value,nudBudget.Value);
+                listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value, nudBudget.Value);
             if (!succ)
             {
                 MessageBox.Show("Er is iets fout gegaan bij het toevoegen!");
@@ -70,7 +70,7 @@ namespace Bootverhuur__t_Sloepke
             if (result != DialogResult.OK) return;
             hr.UpdateHuurCompletely(tbEmail.Text, tbHuurder.Text, tbVerhuurder.Text, (Boot)listBoot.SelectedItem,
                 listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value, nudBudget.Value);
-            hr.ExportHuur(fbd);
+            hr.ExportHuur(fbd, 0);
         }
 
         private void btnAddVaarwater_Click(object sender, EventArgs e)
@@ -78,5 +78,24 @@ namespace Bootverhuur__t_Sloepke
             AddVaarplaats show = new AddVaarplaats();
             show.ShowDialog();
         }
+
+        private void btnExportHTML_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbEmail.Text) || string.IsNullOrWhiteSpace(tbHuurder.Text) ||
+            string.IsNullOrWhiteSpace(tbVerhuurder.Text))
+            {
+                MessageBox.Show("Vul alle velden in!");
+                return;
+            }
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            DialogResult result = fbd.ShowDialog();
+
+            if (result != DialogResult.OK) return;
+            hr.UpdateHuurCompletely(tbEmail.Text, tbHuurder.Text, tbVerhuurder.Text, (Boot)listBoot.SelectedItem,
+                listMateriaal.SelectedItems, listVaarwater.SelectedItems, dtpBegin.Value, dtpEind.Value, nudBudget.Value);
+            hr.ExportHuur(fbd, 1);
+        }
     }
 }
+
