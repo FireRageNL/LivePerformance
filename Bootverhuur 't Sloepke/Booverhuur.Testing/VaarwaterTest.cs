@@ -10,8 +10,6 @@ namespace Booverhuur.Testing
         [TestMethod]
         public void TestReturnVaarwater()
         {
-            List<Vaarplaats> test = Vaarplaats.GetAllVaarplaatsen("Motorboot");
-            Assert.AreEqual(2,test.Count,"De hoeveelheid opgehaalde vaarplaatsen klopt niet van Motorboten");
             List<Vaarplaats> test2 = Vaarplaats.GetAllVaarplaatsen("Spierkrachtboot");
             Assert.AreEqual(0,test2.Count,"De hoeveelheid opgehaalde vaarplaatsen klopt niet van Spierkrachtboten");
         }
@@ -21,6 +19,17 @@ namespace Booverhuur.Testing
         {
             Vaarplaats vp = new Vaarplaats("Testplaats", 3);
             Assert.AreEqual(2,vp.Prijs,"De prijs klopt niet voor een nieuwe vaarplaats");
+        }
+
+        [TestMethod]
+        public void AddVaarwaterTest()
+        {
+            Vaarplaats vp = new Vaarplaats();
+            List<Vaarplaats> Before = Vaarplaats.GetAllVaarplaatsen("Motorboot");
+            int count = Before.Count;
+            vp.AddVaarplaats("Testplaats1");
+            List<Vaarplaats> After = Vaarplaats.GetAllVaarplaatsen("Motorboot");
+            Assert.AreEqual((count+1),After.Count,"Testplaats is niet juist toegevoegd!");
         }
     }
 }

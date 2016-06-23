@@ -82,7 +82,7 @@ namespace Bootverhuur__t_Sloepke.Classes
                 Meeren = 5;
                 return Meeren;
             }
-            Meeren = Convert.ToInt32(Math.Floor(budget / 1));
+            Meeren = Convert.ToInt32(Math.Floor(meren));
             return Meeren;
         }
 

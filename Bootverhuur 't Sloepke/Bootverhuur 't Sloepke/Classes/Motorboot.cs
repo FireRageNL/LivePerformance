@@ -1,6 +1,6 @@
 ﻿namespace Bootverhuur__t_Sloepke.Classes
 {
-    class Motorboot : Boot
+    public class Motorboot : Boot
     {
         public int Literinhoud { get; set; }
         
