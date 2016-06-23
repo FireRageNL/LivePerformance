@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bootverhuur__t_Sloepke.Database;
+﻿using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
-    class Vaarplaats
+    public class Vaarplaats : IIProduct
     {
         private VaarplaatsDatabase _db = new VaarplaatsDatabase();
 
@@ -20,6 +15,11 @@ namespace Bootverhuur__t_Sloepke.Classes
             
         }
 
+        public Vaarplaats(string naam, decimal prijs)
+        {
+            Naam = naam;
+            Prijs = prijs;
+        }
         public bool AddVaarplaats(Vaarplaats vaar)
         {
             return _db.AddVaarplaats(vaar);

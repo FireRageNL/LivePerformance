@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bootverhuur__t_Sloepke.Database;
+﻿using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
-    abstract class Boot : iProduct
+    public abstract class Boot : IIProduct
     {
         private BootDatabase _db = new BootDatabase();
         public string Naam { get; set; }
@@ -15,8 +10,6 @@ namespace Bootverhuur__t_Sloepke.Classes
         public decimal Prijs { get; set; }
 
         public string Type { get; set; }
-
-        protected Boot() { }
 
         public bool AddBoot(Boot boot )
         {

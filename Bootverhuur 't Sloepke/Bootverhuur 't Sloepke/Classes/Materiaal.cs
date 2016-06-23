@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bootverhuur__t_Sloepke.Database;
+﻿using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
-    class Materiaal : iProduct
+    public class Materiaal : IIProduct
     {
         private MateriaalDatabase _db = new MateriaalDatabase();
 
@@ -15,16 +10,33 @@ namespace Bootverhuur__t_Sloepke.Classes
 
         public decimal Prijs { get; set; }
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public Materiaal()
         {
             
         }
 
+        public Materiaal(string naam, decimal prijs, int id)
+        {
+            Naam = naam;
+            Prijs = prijs;
+            Id = id;
+        }
+
         public bool AddMateriaal(Materiaal materiaal)
         {
             return _db.AddMateriaal(materiaal);
+        }
+
+        public bool DeleteMateriaal(Materiaal materiaal)
+        {
+            return _db.DeleteMateriaal(materiaal);
+        }
+
+        public bool EditMateriaal(Materiaal materiaal)
+        {
+            return _db.EditMateriaal(materiaal);
         }
     }
 }

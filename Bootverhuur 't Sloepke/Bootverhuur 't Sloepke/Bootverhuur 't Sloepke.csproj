@@ -51,6 +51,8 @@
     <Compile Include="Classes\Huur.cs" />
     <Compile Include="Classes\iProduct.cs" />
     <Compile Include="Classes\Materiaal.cs" />
+    <Compile Include="Classes\Motorboot.cs" />
+    <Compile Include="Classes\Spierkrachtboot.cs" />
     <Compile Include="Classes\Vaarplaats.cs" />
     <Compile Include="Database\BootDatabase.cs" />
     <Compile Include="Database\Database.cs" />

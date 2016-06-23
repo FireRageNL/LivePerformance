@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bootverhuur__t_Sloepke.Classes;
 using Oracle.ManagedDataAccess.Client;
 
@@ -10,30 +7,25 @@ namespace Bootverhuur__t_Sloepke.Database
 {
     class MateriaalDatabase : Database
     {
-        public MateriaalDatabase()
-        {
-            
-        }
-
         public List<Materiaal> GetAllMateriaal()
         {
             List<Materiaal> ret = new List<Materiaal>();
             try
             {
-                con.Open();
-                cmd.CommandText = "SELECT * FROM MATERIAAL";
-                OracleDataReader dr = cmd.ExecuteReader();
+                Con.Open();
+                Cmd.CommandText = "SELECT * FROM MATERIAAL";
+                OracleDataReader dr = Cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     //DO THE ADDING STUFF
                 }
-                con.Close();
+                Con.Close();
                 return ret;
             }
             catch (OracleException e)
             {
                 Console.WriteLine("Oh noes OracleException: " + e.Message);
-                con.Close();
+                Con.Close();
                 return null;
             }
         }
@@ -42,17 +34,17 @@ namespace Bootverhuur__t_Sloepke.Database
         {
             try
             {
-                con.Open();
-                cmd.CommandText = "INSERT INTO MATERIAAL("; // FINISH SQL STATEMENT
+                Con.Open();
+                Cmd.CommandText = "INSERT INTO MATERIAAL("; // FINISH SQL STATEMENT
                 //cmd.Parameters.Add() ADD SOME PARAMETERS
-                cmd.ExecuteNonQuery();
-                con.Close();
+                Cmd.ExecuteNonQuery();
+                Con.Close();
                 return true;
             }
             catch (OracleException e)
             {
                 Console.WriteLine("Oh noes OracleException: " + e.Message);
-                con.Close();
+                Con.Close();
                 return false;
             }
         }
@@ -61,37 +53,37 @@ namespace Bootverhuur__t_Sloepke.Database
         {
             try
             {
-                con.Open();
-                cmd.CommandText = "UPDATE MATERIAAL SET "; // FINISH SQL STATEMENT
+                Con.Open();
+                Cmd.CommandText = "UPDATE MATERIAAL SET "; // FINISH SQL STATEMENT
                 //cmd.Parameters.Add() ADD SOME PARAMETERS
-                cmd.ExecuteNonQuery();
-                con.Close();
+                Cmd.ExecuteNonQuery();
+                Con.Close();
                 return true;
             }
             catch (OracleException e)
             {
                 Console.WriteLine("Oh noes OracleException: " + e.Message);
-                con.Close();
+                Con.Close();
                 return false;
             }
         }
 
         public bool DeleteMateriaal(Materiaal materiaal)
         {
-            using (con)
+            using (Con)
             try
             {
-                con.Open();
-                cmd.CommandText = "DELETE FROM MATERIAAL WHERE MateriaalID = :mi";
-                cmd.Parameters.Add("mi", Materiaal.ID);
-                cmd.ExecuteNonQuery();
-                con.Close();
+                Con.Open();
+                Cmd.CommandText = "DELETE FROM MATERIAAL WHERE MateriaalID = :mi";
+                Cmd.Parameters.Add("mi", materiaal.Id);
+                Cmd.ExecuteNonQuery();
+                Con.Close();
                 return true;
             }
             catch (OracleException e)
             {
                 Console.WriteLine("Oh noes OracleException: " + e.Message);
-                con.Close();
+                Con.Close();
                 return false;
             }
         }

@@ -1,8 +1,8 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
-    public interface iProduct
+    public interface IIProduct
     {
         string Naam { get; set; }
 
