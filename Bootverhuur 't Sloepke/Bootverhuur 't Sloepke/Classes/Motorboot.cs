@@ -6,13 +6,19 @@
         
         public int Actieradius { get; set; }
 
-        public Motorboot(int liter, string naam, decimal prijs, string type)
+        public Motorboot(int liter, string naam, string klasse)
         {
             Literinhoud = liter;
             Actieradius = (liter*15);
             Naam = naam;
-            Prijs = prijs;
-            Type = type;
+            Prijs = 15;
+            Klasse = klasse;
+            Type = "Motorboot";
+        }
+
+        public override string ToString()
+        {
+            return Klasse + " - " + Naam + " Actieradius: " + Actieradius;
         }
     }
 }

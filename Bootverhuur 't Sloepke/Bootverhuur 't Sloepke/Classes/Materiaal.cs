@@ -1,14 +1,17 @@
-﻿using Bootverhuur__t_Sloepke.Database;
+﻿using System.Collections.Generic;
+using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
     public class Materiaal : IIProduct
     {
-        private MateriaalDatabase _db = new MateriaalDatabase();
+        private static MateriaalDatabase _db = new MateriaalDatabase();
 
         public string Naam { get; set; }
 
         public decimal Prijs { get; set; }
+        
+        public string Omschrijving { get; set; }
 
         public int Id { get; set; }
 
@@ -17,10 +20,11 @@ namespace Bootverhuur__t_Sloepke.Classes
             
         }
 
-        public Materiaal(string naam, decimal prijs, int id)
+        public Materiaal(string naam, string omschrijving, int id)
         {
             Naam = naam;
-            Prijs = prijs;
+            Prijs = (decimal) 1.25;
+            Omschrijving = omschrijving;
             Id = id;
         }
 
@@ -37,6 +41,16 @@ namespace Bootverhuur__t_Sloepke.Classes
         public bool EditMateriaal(Materiaal materiaal)
         {
             return _db.EditMateriaal(materiaal);
+        }
+
+        public static List<Materiaal> GetAllMateriaal()
+        {
+            return _db.GetAllMateriaal();
+        }
+
+        public override string ToString()
+        {
+            return Naam + ": " + Omschrijving;
         }
     }
 }

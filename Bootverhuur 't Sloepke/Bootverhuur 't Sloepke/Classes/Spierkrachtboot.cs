@@ -2,11 +2,17 @@
 {
     class Spierkrachtboot : Boot
     {
-        public Spierkrachtboot(string naam, decimal prijs, string type)
+        public Spierkrachtboot(string naam, string klasse)
         {
             Naam = naam;
-            Prijs = prijs;
-            Type = type;
+            Prijs = 10;
+            Type = "Spierkrachtboot";
+            Klasse = klasse;
+        }
+
+        public override string ToString()
+        {
+            return Klasse+ " - " +Naam;
         }
     }
 }

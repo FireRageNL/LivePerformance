@@ -1,28 +1,43 @@
-﻿using Bootverhuur__t_Sloepke.Database;
+﻿using System.Collections.Generic;
+using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
 {
     public class Vaarplaats : IIProduct
     {
-        private VaarplaatsDatabase _db = new VaarplaatsDatabase();
+        private static readonly VaarplaatsDatabase Db = new VaarplaatsDatabase();
 
         public string Naam { get; set; }
         
         public decimal Prijs { get; set; }
+
+        public int Id { get; set; }
 
         public Vaarplaats()
         {
             
         }
 
-        public Vaarplaats(string naam, decimal prijs)
+        public Vaarplaats(string naam, int id)
         {
             Naam = naam;
-            Prijs = prijs;
+            Prijs = 2;
+            Id = id;
+
         }
         public bool AddVaarplaats(Vaarplaats vaar)
         {
-            return _db.AddVaarplaats(vaar);
+            return Db.AddVaarplaats(vaar);
+        }
+
+        public static List<Vaarplaats> GetAllVaarplaatsen(string type)
+        {
+            return Db.GetVaarplaatsen(type);
+        }
+
+        public override string ToString()
+        {
+            return Naam;
         }
     }
 }

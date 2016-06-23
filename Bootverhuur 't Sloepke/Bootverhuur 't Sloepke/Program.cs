@@ -13,7 +13,7 @@ namespace Bootverhuur__t_Sloepke
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new HuurAanmaken());
         }
     }
 }

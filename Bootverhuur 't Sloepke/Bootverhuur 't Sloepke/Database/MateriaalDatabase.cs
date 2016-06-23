@@ -13,11 +13,12 @@ namespace Bootverhuur__t_Sloepke.Database
             try
             {
                 Con.Open();
-                Cmd.CommandText = "SELECT * FROM MATERIAAL";
+                Cmd.CommandText = "SELECT MateriaalID, Naam, Omschrijving FROM MATERIAAL";
                 OracleDataReader dr = Cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    //DO THE ADDING STUFF
+                    Materiaal add = new Materiaal(dr.GetString(1),dr.GetString(2),dr.GetInt32(0));
+                    ret.Add(add);
                 }
                 Con.Close();
                 return ret;

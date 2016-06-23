@@ -75,7 +75,40 @@ namespace Bootverhuur__t_Sloepke.Database
                 OracleDataReader dr = Cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    //DO THE ADDING STUFF
+                    if (type == "Motorboot")
+                    {
+                        Motorboot add = new Motorboot(dr.GetInt32(2), dr.GetString(0), dr.GetString(3));
+                        ret.Add(add);
+                    }
+                    else
+                    {
+                        Spierkrachtboot adds = new Spierkrachtboot(dr.GetString(0), dr.GetString(3));
+                        ret.Add(adds);
+                    }
+                }
+                Cmd.Parameters.Clear();
+                Con.Close();
+                return ret;
+            }
+            catch (OracleException e)
+            {
+                Console.WriteLine("Oh noes OracleException: " + e.Message);
+                Con.Close();
+                return null;
+            }
+        }
+
+        public List<string> GetTypes()
+        {
+            List<string> ret = new List<string>();
+            try
+            {
+                Con.Open();
+                Cmd.CommandText = "SELECT UNIQUE TYPE FROM BOOT";
+                OracleDataReader dr = Cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    ret.Add(dr.GetString(0));
                 }
                 Con.Close();
                 return ret;
@@ -88,4 +121,5 @@ namespace Bootverhuur__t_Sloepke.Database
             }
         }
     }
-}
+    }
+

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes
@@ -26,9 +28,11 @@ namespace Bootverhuur__t_Sloepke.Classes
 
         public DateTime HuurEind { get; set; }
 
-        public bool AddHuur(Huur huur)
+        public Huur()
         {
-            return _db.AddHuur(huur);
+            Materialen = new List<Materiaal>();
+            Vaarplaatsen = new List<Vaarplaats>();
+            
         }
 
         public List<Huur> GetAllHuren()
@@ -43,24 +47,68 @@ namespace Bootverhuur__t_Sloepke.Classes
 
         public int CalculateVaarplaatsen(decimal budget)
         {
-            int bijhuurkosten = 0;
-            foreach (Materiaal mat in Materialen)
-            {
-                bijhuurkosten = (Convert.ToInt32(mat.Prijs) * Convert.ToInt32(HuurEind.Date - HuurBegin.Date));
-            }
-            budget = budget - ((Boot.Prijs * Convert.ToInt32(HuurEind.Date - HuurBegin.Date)) + bijhuurkosten);
+            Meeren = 0;
+            decimal bijhuurkosten = Materialen.Aggregate<Materiaal, decimal>(0, (current, mat) => current + (mat.Prijs*(HuurEind.Date - HuurBegin.Date).Days));
+            decimal vaarkosten = Vaarplaatsen.Aggregate<Vaarplaats, decimal>(0, (current, vaar) => current + (vaar.Prijs*(HuurEind.Date - HuurBegin.Date).Days));
+            budget = budget - ((Boot.Prijs * (HuurEind.Date - HuurBegin.Date).Days) + bijhuurkosten + vaarkosten);
 
             if (budget <= 5 || Boot.Type == "Kano")
             {
-                return (Convert.ToInt32(budget) / 1);
+                Meeren = Convert.ToInt32(Math.Floor(budget / 1));
+                return Meeren;
             }
 
             decimal meren = budget / (decimal)1.5;
             if (meren < 5)
             {
-                meren = 5;
+                Meeren = 5;
+                return Meeren;
             }
-            return Convert.ToInt32(meren);
+            Meeren = Convert.ToInt32(Math.Floor(budget / 1));
+            return Meeren;
+        }
+
+        public void UpdateBoot(Boot listBoot)
+        {
+            Boot = listBoot;
+        }
+
+        public void UpdateMateriaal(ListBox.SelectedObjectCollection selectedItems)
+        {
+            Materialen.Clear();
+            foreach (object mat in selectedItems)
+            {
+                Materialen.Add((Materiaal)mat);
+            }
+        }
+
+        public void UpdateVaarwater(ListBox.SelectedObjectCollection selectedItems)
+        {
+            Vaarplaatsen.Clear();
+            foreach (object vaar in selectedItems)
+            {
+                Vaarplaatsen.Add((Vaarplaats)vaar);
+            }
+        }
+
+        public void UpdateData(DateTime dtpBegin, DateTime dtpEind)
+        {
+            HuurBegin = dtpBegin;
+            HuurEind = dtpEind;
+        }
+
+        public bool AddHuur(string email, string huurder, string verhuurder, Boot boot, ListBox.SelectedObjectCollection materiaal, ListBox.SelectedObjectCollection vaarwater, DateTime begin, DateTime eind, decimal budget)
+        {
+            Huurderemail = email;
+            Huurdernaam = huurder;
+            Naam = verhuurder;
+            Boot = boot;
+            Budget = budget;
+            UpdateData(begin,eind);
+            UpdateMateriaal(materiaal);
+            UpdateVaarwater(vaarwater);
+            CalculateVaarplaatsen(Budget);
+            return _db.AddHuur(this);
         }
     }
 }
