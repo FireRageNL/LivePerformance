@@ -15,11 +15,6 @@ namespace Bootverhuur__t_Sloepke.Classes
 
         public int Id { get; set; }
 
-        public Materiaal()
-        {
-            
-        }
-
         public Materiaal(string naam, string omschrijving, int id)
         {
             Naam = naam;

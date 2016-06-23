@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Classes;
 
@@ -17,7 +16,7 @@ namespace Bootverhuur__t_Sloepke
             cbBoot.DataSource = Boot.GetTypes();
         }
 
-        private void cbBoot_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void cbBoot_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoot.DataSource = null;
             listBoot.DataSource = Boot.GetBoats(cbBoot.SelectedValue.ToString());
@@ -25,7 +24,7 @@ namespace Bootverhuur__t_Sloepke
             listVaarwater.DataSource = Vaarplaats.GetAllVaarplaatsen(cbBoot.SelectedValue.ToString());
         }
 
-        private void btnBereken_Click(object sender, System.EventArgs e)
+        private void btnBereken_Click(object sender, EventArgs e)
         {
             hr.UpdateBoot((Boot)listBoot.SelectedItem);
             hr.UpdateMateriaal(listMateriaal.SelectedItems);
@@ -34,7 +33,7 @@ namespace Bootverhuur__t_Sloepke
             lblMeren.Text = hr.CalculateVaarplaatsen(nudBudget.Value).ToString();
         }
 
-        private void btnOpslaan_Click(object sender, System.EventArgs e)
+        private void btnOpslaan_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbEmail.Text) || string.IsNullOrWhiteSpace(tbHuurder.Text) ||
                 string.IsNullOrWhiteSpace(tbVerhuurder.Text))

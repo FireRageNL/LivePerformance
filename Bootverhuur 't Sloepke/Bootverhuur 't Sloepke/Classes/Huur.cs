@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Database;
 
@@ -44,7 +43,7 @@ namespace Bootverhuur__t_Sloepke.Classes
 
         public void ExportHuur(FolderBrowserDialog file)
         {
-            string writeloc = file.SelectedPath + "\\Huurcontract - " + this.Huurdernaam + ".txt";
+            string writeloc = file.SelectedPath + "\\Huurcontract - " + Huurdernaam + ".txt";
             using (StreamWriter writer = File.CreateText(writeloc))
             {
                 writer.WriteLine("Huurder "+ Huurdernaam + " is met Verhuurder "+Naam +" op "+ DateTime.Today.ToShortDateString()+ " Overeengekomen tot de huur van: ");

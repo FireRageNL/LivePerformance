@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 using Bootverhuur__t_Sloepke.Database;
 
 namespace Bootverhuur__t_Sloepke.Classes

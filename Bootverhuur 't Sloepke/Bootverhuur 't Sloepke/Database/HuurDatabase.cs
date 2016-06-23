@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 using Bootverhuur__t_Sloepke.Classes;
 using Oracle.ManagedDataAccess.Client;
 
